@@ -1,0 +1,164 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "typeahead-search-box": {
+      "projectType": "library",
+      "root": "projects/typeahead-search-box",
+      "sourceRoot": "projects/typeahead-search-box/src",
+      "prefix": "pk",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/typeahead-search-box/tsconfig.lib.json",
+            "project": "projects/typeahead-search-box/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/typeahead-search-box/src/test.ts",
+            "tsConfig": "projects/typeahead-search-box/tsconfig.spec.json",
+            "karmaConfig": "projects/typeahead-search-box/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/typeahead-search-box/tsconfig.lib.json",
+              "projects/typeahead-search-box/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "typeahead-search-box-example": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/typeahead-search-box-example",
+      "sourceRoot": "projects/typeahead-search-box-example/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/typeahead-search-box-example",
+            "index": "projects/typeahead-search-box-example/src/index.html",
+            "main": "projects/typeahead-search-box-example/src/main.ts",
+            "polyfills": "projects/typeahead-search-box-example/src/polyfills.ts",
+            "tsConfig": "projects/typeahead-search-box-example/tsconfig.app.json",
+            "aot": false,
+            "assets": [
+              "projects/typeahead-search-box-example/src/favicon.ico",
+              "projects/typeahead-search-box-example/src/assets"
+            ],
+            "styles": [
+              "projects/typeahead-search-box-example/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/typeahead-search-box-example/src/environments/environment.ts",
+                  "with": "projects/typeahead-search-box-example/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "typeahead-search-box-example:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "typeahead-search-box-example:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "typeahead-search-box-example:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/typeahead-search-box-example/src/test.ts",
+            "polyfills": "projects/typeahead-search-box-example/src/polyfills.ts",
+            "tsConfig": "projects/typeahead-search-box-example/tsconfig.spec.json",
+            "karmaConfig": "projects/typeahead-search-box-example/karma.conf.js",
+            "assets": [
+              "projects/typeahead-search-box-example/src/favicon.ico",
+              "projects/typeahead-search-box-example/src/assets"
+            ],
+            "styles": [
+              "projects/typeahead-search-box-example/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/typeahead-search-box-example/tsconfig.app.json",
+              "projects/typeahead-search-box-example/tsconfig.spec.json",
+              "projects/typeahead-search-box-example/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/typeahead-search-box-example/e2e/protractor.conf.js",
+            "devServerTarget": "typeahead-search-box-example:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "typeahead-search-box-example:serve:production"
+            }
+          }
+        }
+      }
+    }},
+  "defaultProject": "typeahead-search-box"
+}
